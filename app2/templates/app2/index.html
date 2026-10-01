@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}App 2 - Catálogo de Servicios | Mi Proyecto Django{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <span class="hero-badge">App 2 &bull; Módulo de Servicios</span>
+    <h1>{{ titulo|default:"Módulo 2: Catálogo de Servicios" }}</h1>
+    <p>
+        Aplicación complementaria que demuestra herencia de <code>base.html</code> y renderizado dinámico de servicios del sistema.
+    </p>
+</section>
+
+<!-- Grid de Tarjetas Dinámicas para Servicios -->
+<div class="cards-grid">
+    {% for servicio in lista_servicios %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ servicio.icono }} {{ servicio.nombre }}</h3>
+            <span class="card-badge {% if servicio.estado == 'Activo' %}success{% else %}cyan{% endif %}">
+                {{ servicio.estado }}
+            </span>
+        </div>
+        <div class="card-body">
+            <p>{{ servicio.descripcion }}</p>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
+                <strong>Tiempo estimado:</strong> {{ servicio.tiempo }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">
+                {{ servicio.tarifa }}
+            </span>
+            <button class="btn btn-outline" onclick="alert('Servicio seleccionado: {{ servicio.nombre }}')">
+                Solicitar
+            </button>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay servicios configurados.</p>
+    {% endfor %}
+</div>
+
+<!-- Resumen en Lista -->
+<div class="section-box">
+    <div class="section-header">
+        <h2 class="section-title">⚡ Lista Rápida de Servicios</h2>
+    </div>
+    <ul class="items-simple-list">
+        {% for servicio in lista_servicios %}
+        <li>
+            <span><strong>ID #{{ servicio.id }}:</strong> {{ servicio.nombre }} - {{ servicio.tarifa }}</span>
+            <span class="badge badge-success">{{ servicio.estado }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

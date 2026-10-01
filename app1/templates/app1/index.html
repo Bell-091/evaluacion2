@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}App 1 - Catálogo de Elementos | Mi Proyecto Django{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <span class="hero-badge">App 1 &bull; Datos Dinámicos</span>
+    <h1>{{ titulo|default:"Módulo 1: Catálogo de Elementos" }}</h1>
+    <p>
+        Esta vista procesa e itera una lista de diccionarios enviada desde el backend (views.py) utilizando el tag <code>{% verbatim %}{% for item in lista_elementos %}{% endverbatim %}</code>.
+    </p>
+</section>
+
+<!-- Sección Requerida: Iteración básica <li>ID: {{ item.id }} - {{ item.nombre }}</li> -->
+<div class="section-box">
+    <div class="section-header">
+        <h2 class="section-title">📋 Lista de Ítems (Renderizado Estándar)</h2>
+        <input type="text" class="search-input" placeholder="Filtrar por nombre..." data-list-target="items-list-standard">
+    </div>
+    
+    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
+        Demostración de sintaxis requerida por la guía: <code>&lt;li&gt;ID: &#123;&#123; item.id &#125;&#125; - &#123;&#123; item.nombre &#125;&#125;&lt;/li&gt;</code>
+    </p>
+
+    <ul class="items-simple-list" id="items-list-standard">
+        {% for item in lista_elementos %}
+            <li>
+                <span><strong>ID: {{ item.id }}</strong> - {{ item.nombre }}</span>
+                {% if item.categoria %}
+                    <span class="badge badge-info">{{ item.categoria }}</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay elementos disponibles en la lista.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Vista detallada en Tabla Estilizada con Datos Dinámicos -->
+<div class="section-box">
+    <div class="section-header">
+        <h2 class="section-title">📊 Vista Detallada de Datos</h2>
+        <input type="text" class="search-input" placeholder="Buscar en la tabla..." data-table-target="table-items">
+    </div>
+
+    <div class="table-responsive">
+        <table class="data-table" id="table-items">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista_elementos %}
+                <tr>
+                    <td><strong>#{{ item.id }}</strong></td>
+                    <td><strong>{{ item.nombre }}</strong></td>
+                    <td>{{ item.categoria|default:"General" }}</td>
+                    <td style="color: var(--primary); font-weight: 700;">{{ item.precio|default:"N/A" }}</td>
+                    <td>{{ item.stock|default:"0" }} un.</td>
+                    <td>
+                        {% if item.estado == 'Disponible' %}
+                            <span class="badge badge-success">{{ item.estado }}</span>
+                        {% elif item.estado == 'Por encargo' %}
+                            <span class="badge badge-warning">{{ item.estado }}</span>
+                        {% else %}
+                            <span class="badge badge-info">{{ item.estado|default:"Activo" }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align: center; color: var(--text-muted);">
+                        No se encontraron registros para mostrar.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

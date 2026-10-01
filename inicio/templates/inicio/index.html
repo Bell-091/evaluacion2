@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio | Mi Proyecto Django{% endblock %}
+
+{% block content %}
+<!-- Hero Section de Bienvenida -->
+<section class="page-hero">
+    <span class="hero-badge">Backend Django v6.1</span>
+    <h1>Bienvenido a Mi Proyecto Django</h1>
+    <p>
+        Plataforma modular desarrollada con Django Templates, manejo de archivos estáticos y gestión de datos dinámicos mediante listas y diccionarios.
+    </p>
+</section>
+
+<!-- Resumen y Enlaces a Módulos -->
+<div class="cards-grid">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">📦 Aplicación 1 (Catálogo)</h3>
+            <span class="card-badge success">Módulo Activo</span>
+        </div>
+        <div class="card-body">
+            <p>
+                Visualización de datos dinámicos enviados desde la vista. Contiene iteración mediante ciclo <code>{% verbatim %}{% for %}{% endverbatim %}</code> sobre listas de diccionarios.
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'app1' %}" class="btn btn-primary">Ir a App 1 &rarr;</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">⚡ Aplicación 2 (Servicios)</h3>
+            <span class="card-badge cyan">Módulo Activo</span>
+        </div>
+        <div class="card-body">
+            <p>
+                Módulo complementario con información de servicios del sistema, estados en tiempo real y componentes interactivos integrados con plantillas base.
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'app2' %}" class="btn btn-primary">Ir a App 2 &rarr;</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🎨 Arquitectura & Estáticos</h3>
+            <span class="card-badge">Configurado</span>
+        </div>
+        <div class="card-body">
+            <p>
+                Configuración global de <code>STATICFILES_DIRS</code> y <code>TEMPLATES['DIRS']</code> con estilos CSS personalizados y herencia de plantillas modular.
+            </p>
+        </div>
+        <div class="card-footer">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Herencia de base.html</span>
+        </div>
+    </div>
+</div>
+
+<!-- Información adicional del sistema -->
+<div class="section-box">
+    <div class="section-header">
+        <h2 class="section-title">📌 Características de la Implementación</h2>
+    </div>
+    <ul class="items-simple-list">
+        <li><strong>Herencia de Plantillas:</strong> Uso de <code>{% verbatim %}{% extends 'base.html' %}{% endverbatim %}</code> en todas las aplicaciones.</li>
+        <li><strong>Control de Versiones:</strong> Historial estructurado y commits incrementales por cada fase.</li>
+        <li><strong>Archivos Estáticos:</strong> Inclusión de hoja de estilos centralizada, imagen corporativa y scripts interactivos.</li>
+    </ul>
+</div>
+{% endblock %}
