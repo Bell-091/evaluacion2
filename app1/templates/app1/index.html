@@ -23,16 +23,12 @@
         Demostración de sintaxis requerida por la guía: <code>&lt;li&gt;ID: &#123;&#123; item.id &#125;&#125; - &#123;&#123; item.nombre &#125;&#125;&lt;/li&gt;</code>
     </p>
 
+    <!-- Lista con sintaxis directa solicitada en la guía -->
     <ul class="items-simple-list" id="items-list-standard">
         {% for item in lista_elementos %}
-            <li>
-                <span><strong>ID: {{ item.id }}</strong> - {{ item.nombre }}</span>
-                {% if item.categoria %}
-                    <span class="badge badge-info">{{ item.categoria }}</span>
-                {% endif %}
-            </li>
+            <li>ID: {{ item.id }} - {{ item.nombre }}</li>
         {% empty %}
-            <li>No hay elementos disponibles en la lista.</li>
+            <li>No hay elementos disponibles.</li>
         {% endfor %}
     </ul>
 </div>
